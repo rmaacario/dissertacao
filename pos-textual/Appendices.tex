@@ -1,0 +1,148 @@
+\chapter*{Appendices}
+\addcontentsline{toc}{chapter}{Appendices}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\renewcommand{\thetable}{A.\arabic{table}}
+
+
+\section*{Appendix I}
+\label{app:1}
+
+This appendix provides a detailed breakdown of the reasons why data segments were removed during the cleaning process. Table~\ref{tab:cleaning-reasons-complete} lists the specific reasons for removal and the corresponding number of segments affected by each reason.
+
+\begin{longtable}{cc}
+\label{tab:cleaning-reasons-complete} \\
+\toprule 
+\textbf{Reason} & \textbf{Segments} \\
+\midrule 
+Duplicate(s) & 218,427 \\
+Harmful element -- in source or target & 19,343 \\
+Length in tokens is lower than the boundary (4) in source & 7,516 \\
+MTQE score is lower than 0.6 & 5,606 \\
+Length in tokens is lower than the boundary (4) in target & 4,077 \\
+Detected language is not [`pt'] (target) & 2,722 \\
+Harmful element [ in source or target & 1,623 \\
+Length in characters is higher than the boundary (450) in source & 970 \\
+Possible mismatch (beta) & 716 \\
+Rare character \$ in source or target & 254 \\
+Detected language is not [`en'] (source) & 225 \\
+Rare character \& in source or target & 176 \\
+Length in сharacters is higher than the boundary (450) in target & 157 \\
+Repetition(s) & 143 \\
+Rare character ü in source or target & 106 \\
+Rare character á in source or target & 91 \\
+Rare character ª in source or target & 87 \\
+Rare character \# in source or target & 84 \\
+Rare character í in source or target & 74 \\
+Length in сharacters is lower than the boundary (15) in target & 72 \\ 
+Rare character ° in source or target & 68 \\
+Length in сharacters is lower than the boundary (15) in source & 66 \\
+Rare character ö in source or target & 62 \\
+Rare character + in source or target & 61 \\
+Rare character … in source or target & 52 \\
+Rare character = in source or target & 46 \\
+Harmful element @ in source or target & 43 \\
+Rare character ā in source or target & 41 \\
+Length in tokens is higher than the boundary (200) in source & 38 \\
+Contains punctuation element(s) in the beginning (target segment) & 37 \\
+Rare character ï in source or target & 36 \\
+Rare character Ú in source or target & 34 \\
+Harmful element ] in source or target & 31 \\
+Rare character è in source or target & 31 \\
+Rare character ó in source or target & 30 \\
+Rare character ♪ in source or target & 27 \\
+Rare character ç in source or target & 27 \\
+Rare character ñ in source or target & 26 \\
+Rare character ` in source or target & 26 \\
+Rare character ë in source or target & 25 \\
+Rare character à in source or target & 23 \\
+Rare character ô in source or target & 23 \\
+Rare character ² in source or target & 22 \\
+Rare character ã in source or target & 22 \\
+Rare character ō in source or target & 21 \\
+Contains punctuation element(s) in the beginning (source segment) & 20 \\
+Rare character ä in source or target & 17 \\
+Harmful element * in source or target & 17 \\
+Rare character \textasciicircum in source or target & 17 \\
+Contains emoji(s) in target segment & 15 \\ 
+Rare character ´ in source or target & 14 \\
+Rare character ‡ in source or target & 14 \\
+Harmful element ' ' in source or target & 13 \\
+Rare character Ö in source or target & 13 \\
+Rare character ø in source or target & 12 \\
+Rare character ♩ in source or target & 12 \\ \\
+Rare character É in source or target & 9 \\
+Length in tokens is higher than the boundary (200) in target & 9 \\
+Rare character ĺ in source or target & 8 \\
+Rare character ù in source or target & 7 \\
+Harmful element \_\_\_\_\_\_\_\_ in source or target & 7 \\
+Rare character Ô in source or target & 5 \\
+Rare character Ê in source or target & 5 \\
+Rare character Ã in source or target & 5 \\
+Rare character Č in source or target & 4 \\
+Rare character î in source or target & 4 \\
+Rare character ˜ in source or target & 4 \\
+Rare character \_ in source or target & 4 \\
+Rare character £ in source or target & 4 \\
+Rare character ì in source or target & 4 \\
+Rare character ½ in source or target & 3 \\
+Rare character â in source or target & 3 \\ 
+Rare character ć in source or target & 3 \\
+Rare character ˆ in source or target & 3 \\
+Rare character ú in source or target & 3 \\
+Rare character ~ in source or target & 3 \\
+Rare character ℅ in source or target & 3 \\
+Rare character ī in source or target & 2 \\
+Rare character ı in source or target & 2 \\
+Rare character Ă in source or target & 2 \\
+Missing segment(s) in source and(or) target & 2 \\
+Rare character ẽ in source or target & 2 \\
+Rare character € in source or target & 2 \\
+Rare character о in source or target & 2 \\
+Rare character ¨ in source or target & 2 \\
+Rare character ê in source or target & 2 \\
+Rare character å in source or target & 2 \\
+Rare character ò in source or target & 2 \\
+Rare character È in source or target & 2 \\
+Rare character Á in source or target & 2 \\
+Rare character Â in source or target & 2 \\
+Rare character ¼ in source or target & 2 \\
+Rare character ㇄ in source or target & 2 \\
+Rare character Ç in source or target & 2 \\
+Rare character В in source or target & 1 \\
+Rare character प in source or target & 1 \\
+Rare character ⅔ in source or target & 1 \\
+Rare character 你 in source or target & 1 \\
+Rare character > in source or target & 1 \\
+Harmful element ** in source or target & 1 \\
+Harmful element ¶ in source or target & 1 \\
+Rare character Ë in source or target & 1 \\
+Rare character ă in source or target & 1 \\
+Rare character ǵ in source or target & 1 \\
+Rare character Ż in source or target & 1 \\
+Rare character ő in source or target & 1 \\
+Rare character Ō in source or target & 1 \\
+Rare character ğ in source or target & 1 \\
+Rare character ¡ in source or target & 1 \\
+Rare character û in source or target & 1 \\
+Rare character ¥ in source or target & 1 \\
+Rare character ³ in source or target & 1 \\
+Rare character ¾ in source or target & 1 \\
+Rare character ð in source or target & 1 \\
+Rare character Å in source or target & 1 \\
+Rare character æ in source or target & 1 \\
+Contains emoji(s) in source segment & 1 \\
+\bottomrule 
+\caption{Reasons for Segment Removal During Data Pre-processing (Complete).} 
+\end{longtable}
+
+
+
+
+\section*{Appendix II}
+\label{app:2}
+
+This appendix provides access to the code and supplementary resources used in this study. All relevant scripts, datasets, and documentation have been organized and made publicly available in a GitHub repository to facilitate transparency and reproducibility.
+
+To access the repository, please visit the following link: \url{https://github.com/rmaacario/spatial-semantics-translation}.

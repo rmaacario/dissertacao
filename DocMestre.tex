@@ -1,0 +1,230 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Baseado no modelo para teses da ESALQ/USP de Antonio Augusto Franco Garcia. Modificado por Marcos Lopes (Depto. de Linguística/USP).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, 12pt, oneside]{memoir}
+\usepackage[top=3cm, left=3cm, right=3cm, bottom=3cm]{geometry}
+
+% Parâmetros linguísticos (hifenização, títulos etc.)
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguages{brazil}
+
+% Configurações da fonte de caracteres
+\usepackage[protrusion=true, expansion, final, factor=1100]{microtype}
+
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX, 
+Numbers={Proportional, OldStyle}
+]{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
+
+% Bibliografia com estilo "Autor (Ano)"
+\usepackage[citestyle=authoryear, sorting=nyt, style=authoryear]{biblatex}
+
+% Se preferir o estilo de bibliografia ABNT, use a declaração a seguir:
+%\usepackage[citestyle=authoryear, sorting=nyt, style=abnt, pretty, noslsn]{biblatex}
+
+\addbibresource{./referencias/bibliografia.bib}
+
+\setlength{\bibitemsep}{0.5\baselineskip}  % Aumenta o espaço entre as obras nas Referências
+
+\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+
+% Pacotes "computacionais"
+\usepackage{algorithm}
+    \renewcommand{\listalgorithmname}{List of Algorithms}
+\usepackage{algpseudocode}
+\usepackage{minted}  % Para códigos-fonte
+
+\usepackage{caption}  % Formatação das legendas
+    \captionsetup{margin=10pt, font=footnotesize, labelfont=bf}
+\usepackage[all]{nowidow}  % Controle de linhas viúvas e órfãs
+
+\usepackage[autostyle=true]{csquotes}  % Citações de acordo com o padrão da língua
+
+% PACOTES DO RAFAEL %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CSV and TXT reader for appendices
+
+\usepackage[many]{tcolorbox} % for COLORED BOXES (tikz and xcolor included)
+\usepackage{setspace}  % for LINE SPACING
+\usepackage{multicol} % for MULTICOLUMNS
+
+\newtcolorbox{boxK}{
+    sharpish corners, % better drop shadow
+    boxrule = 0pt,
+    toprule = 4.5pt, % top rule weight
+    enhanced,
+    fuzzy shadow = {0pt}{-2pt}{-0.5pt}{0.5pt}{black!35}
+}
+
+\usepackage{soul}
+\usepackage{xcolor}
+
+\definecolor{lightgray}{RGB}{224, 224, 224}
+\definecolor{mblue}{RGB}{0, 127, 204}
+\definecolor{lightyellow}{RGB}{255, 247, 209}
+\definecolor{lightblue}{RGB}{204, 230, 255} % 
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{tabularx} 
+\usepackage{longtable}
+\usepackage{csvsimple}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{adjustbox}
+\usepackage{rotating}
+\usepackage{linguex}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{blindtext}
+\usepackage{epigraph}
+\usepackage{ragged2e}
+
+\usepackage{nameref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Deixe sempre o pacote hyperref por último
+\usepackage[pdfencoding=auto, 
+psdextra, 
+unicode=true, 
+colorlinks=true, 
+urlcolor=blue, 
+citecolor=blue, 
+linkcolor=brown!80!gray, 
+pdfencoding=auto, 
+pdfauthor={Autor}, 
+pdftitle={Título}]{hyperref}
+    \def\UrlBreaks{\do\/\do-}  % Quebra das URLs em notas de rodapé
+
+    
+%%%%%%% Fim dos pacotes; Início da parametrização %%%%%%%
+
+%%%% Formatação do Sumário %%%%%
+\renewcommand*{\cftchapterleader}{}
+\renewcommand*{\cftsectionleader}{}
+\renewcommand*{\cftsubsectionleader}{}
+\renewcommand{\cftchapterpagefont}{}
+\renewcommand*{\cftchapterformatpnum}[1]{~~\textbullet~~\textit{#1}}
+\renewcommand*{\cftsectionformatpnum}[1]{~\textbullet~#1}
+\renewcommand*{\cftsubsectionformatpnum}[1]{~\textbullet~#1}
+\renewcommand{\cftchapterafterpnum}{\cftparfillskip}
+\renewcommand{\cftsectionafterpnum}{\cftparfillskip}
+\renewcommand{\cftsubsectionafterpnum}{\cftparfillskip}
+\setrmarg{3.55em plus 1fil}
+\setsecnumdepth{subsection}
+\maxsecnumdepth{subsection}
+\settocdepth{subsection}
+
+\setlength\cftsectionindent{2em}
+\setlength\cftsubsectionindent{4em}
+\setlength\cftchapternumwidth{2em}
+\setlength\cftsectionnumwidth{2em}
+\setlength\cftsubsectionnumwidth{2em}
+
+% Comando para centralizar cabeçalhos nas tabelas:
+\newcommand*{\centralizar}[1]{\multicolumn{1}{c}{\bfseries #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% VOCÊ DEVE ABRIR O ARQUIVO InformacoesCatalograficas.tex E
+% PREENCHÊ-LO COM AS INFORMAÇÕES RELATIVAS AO SEU TRABALHO. 
+\input{./pre-textual/InformacoesCatalograficas.tex} 
+
+% Capa e Folha de Rosto
+\pagestyle{empty}
+
+\begin{titlingpage}
+\input{./pre-textual/Capa.tex}
+\end{titlingpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+    \pagestyle{plain}
+
+% --- Ficha catalográfica ---
+% Esse documento é gerado pela Biblioteca: https://biblioteca.fflch.usp.br/form/ficha-catalografica-tgi-disserta
+% Coloque o arquivo gerado na pasta "figuras".
+\includepdf{./figuras/file.pdf}
+\clearpage
+
+% Dedicatória (opcional)
+\input{./pre-textual/Dedicatoria.tex}   
+\clearpage
+
+% Agradecimentos (opcional)
+\input{./pre-textual/AgradecimentosCapes.tex}
+\clearpage
+
+% Agradecimentos (opcional)
+\input{./pre-textual/Agradecimentos.tex}
+\clearpage
+
+% Epígrafe (opcional)
+\input{./pre-textual/Epigrafe.tex}
+\clearpage
+
+% Sumário
+\abstractintoc
+\tableofcontents*
+\clearpage
+
+\input{./pre-textual/Resumo.tex}
+\clearpage
+
+\input{./pre-textual/Abstract.tex}
+\clearpage
+
+%\listofalgorithms
+%\clearpage
+
+\listoffigures
+\clearpage
+
+\listoftables
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+\chapterstyle{madsen} % Algumas alternativas: ell; bianchi; demo2; veelo
+
+    \pagestyle{companion}
+    \OnehalfSpacing
+    
+    \input{./textual/Introduction.tex}
+    \input{./textual/Literature.tex}
+    \normalsize{
+    \input{./textual/Methods.tex}
+    \input{./textual/Results.tex}
+    \input{./textual/Conclusion.tex}
+}
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%
+\backmatter
+    \sloppy
+    \pagestyle{plain}  % Sem cabeçalho 
+    
+    \printbibliography[title={References}]
+
+    % Apêndices (opcionais). Edite da forma desejada.
+    \input{./pos-textual/Appendices.tex}
+    
+    % Anexos (opcionais). Edite da forma desejada.
+    \input{./pos-textual/Attachments.tex}
+
+
+\end{document}

@@ -1,0 +1,20 @@
+% \addto{\captionsbrazil}{\renewcommand{\abstractname}{Abstract}}
+
+%\begin{otherlanguage}{english}
+\begin{english}
+\begin{abstract}
+
+\noindent \MakeUppercase{\Sobrenome}, \IniciaisDoNome ~ \textit{\TítuloEmIngles.} Dissertação de Mestrado. Faculdade de Filosofia, Letras e Ciências Humanas, Universidade de São Paulo, \AnoDepósito.\\
+
+\bigskip
+% Insira aqui o seu resumo em inglês (em um único parágrafo de 150 a 500 palavras). Deve apresentar os objetivos, métodos, resultados e conclusões.
+
+\noindent % Não tire esse comando dessa posição, colado ao texto.
+This master's thesis investigates the challenges of translating spatial language using open-source Large Language Models (LLMs) compared to traditional Neural Machine Translation (NMT) systems. It addresses the problem of accurately translating the semantics of spatial prepositions such as ACROSS, INTO, ONTO, and THROUGH, which are often translated into similar verbal or prepositional forms from English to Portuguese (EN-PT-br). Correctly translating these prepositions is crucial for maintaining the semantic integrity of the source content while ensuring fluency and adherence to the lexicalization patterns of the target language \parencite{house2018, talmy2000towardb,slobin2005relating}. The research begins by contextualizing the challenges of spatial language translation, highlighting the limitations of current NMT systems and the potential advantages of LLMs. A comprehensive literature review traces the evolution of translation theories, the development of NMT, and the rise of LLMs, while also describing the potential limitations of the current approach. The methodology employs a corpus-based analysis, assembling a bilingual dataset centered on spatial prepositions comprising TED Talks subtitles from the OPUS platform. This dataset was meticulously pre-processed to facilitate both automated metrics and manual error analysis. The evaluation metrics used include BLEU, METEOR, BERTScore, COMET, and TER, while the manual error analysis specifically identifies and categorizes the types of errors each system makes. The findings reveal that moderate-sized LLMs such as LLaMa-3-8B and Mixtral-8x7B achieve accuracy close to NMT systems such as Google, although this relationship is not always linear, as models like Gemma-7B presented similar performance in human reviews. However, LLMs generally presented other serious mistranslation errors, including interlanguage/code-switching (in) and anglicism (an) errors, failing to convey idiomacity in the target language. Conversely, NMT systems achieved better general fluency and precision for machine translation tasks. Manual error analysis, on the other hand, underscores the ongoing challenges both LLMs and NMT systems face in translating the nuances of spatial language, with both groups presenting consistent numbers of errors like polysemy (po) and syntactic projection (sp) errors, where they either fail to translate a preposition's appropriate meaning or copy the lexicalization patterns from the source text into the target text \parencite{fernandes-etal-2024-spatial, oliveira2022expressing}. The master's thesis concludes that despite the advancements in LLMs, significant hurdles remain in translating spatial language accurately. It suggests that future research should focus on enhancing training datasets, refining model architectures, and developing more sophisticated evaluation metrics that better capture the semantic subtleties of spatial language. This study contributes to the field by providing a detailed comparison of model performance in spatial language translation from EN-PT-br and proposing directions for future improvements.
+
+\bigskip
+\noindent \textbf{Keywords:} \Keywords
+\end{abstract}
+\end{english}
+
+

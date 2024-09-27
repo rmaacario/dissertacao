@@ -1,0 +1,173 @@
+\chapter{Introduction}
+\label{chapter:Introduction}
+
+\epigraph{Thinking is a human feature. Will AI someday really think? That's like asking if submarines swim. If you call it swimming then robots will think, yes. \\ \hfill --- Noam Chomsky}
+
+This Master's thesis investigates the complexities of using Neural Machine Translation (NMT) to translate spatial prepositions, particularly within the English-to-Brazilian Portuguese language pair. Through a comparative analysis, we investigate the effectiveness of Large Language Models (LLMs), also known as Generative AI (GenAI), against established NMT service providers like Google and DeepL. Specifically, our research explores how current open-source LLMs like Llama, Gemma, and Mistral handle the nuances of spatial language. We aim to discern these systems' capabilities in capturing the subtleties of translation in this domain, utilizing a corpus of TED Talks subtitles.
+
+Imagine watching a captivating TED Talk where a speaker describes a scene using spatial language, only to have the subtitles completely miss the mark due to a mistranslated preposition or a poorly handled English phrase. For instance, if a man is described as ``struggling \emph{through}'' a dense crowd, the Portuguese subtitle might simply say ``se debatendo entre'' (floundering among), instead of the more idiomatic ``\emph{atravessando} com dificuldade,'' (crossing with difficulty), correctly emphasizing the aspect of moving past an obstacle conveyed by ``through'' in a verb root in Portuguese \parencite{Slobin-2004}. This highlights the growing need for high-quality translations in subtitles, particularly for capturing the nuances of spatial expressions. To address this challenge, while subtitling often relies heavily on human effort \parencite{karakanta-etal-2020-42}, this research explores the potential of using NMT, especially open-source LLMs, as an  solution.
+
+This research evaluates the accuracy, fluency, and post-editing needs of LLMs compared to NMT systems and human translation, the gold standard. We employ a range of well-known evaluation metrics -- BLEU~\parencite{bleu}, METEOR~\parencite{lavie-agarwal-2007-meteor}, BERTscore~\parencite{zhang2020bertscore}, COMET~\parencite{rei-etal-2020-comet}, and TER~\parencite{snover-etal-2006-study} -- to assess content quality. By identifying potential strengths and weaknesses in handling spatial language, including polysemy, crosslinguistic differences, and other complexities, this research aims to contribute to both improved translation quality and the development of more effective evaluation methods in Machine Translation (MT).
+
+TED Talks subtitles were particularly chosen because they perfectly combine semi-formal language with a closer approximation of everyday use. \textcite{Brysbaert2009} found that film and television subtitles are easy to gather, involve social interactions, and are more commonly watched than books are read. Their study on the psycholinguistic effect of word frequency measures showed that subtitle-derived frequencies significantly outperformed those from books and the internet. These findings highlight the value of using subtitles for linguistic research, ultimately influencing our decision.
+
+\section{The Research Problem}
+
+NMT has emerged as a significant advancement in Natural Language Processing (NLP), leveraging artificial neural networks to overcome the limitations of traditional methods that heavily relied on feature engineering. These systems, implemented through robust deep neural networks with multiple layers, can now learn intricate relationships between words and sequences~\parencite{TAN20205, wang-etal-2019-learning-deep}. Notably, the Transformer architecture, with its self-attention mechanisms, enables NMT to capture complex language structures, addressing the challenges previous statistical approaches faced in capturing long-distance dependencies within sentences~\parencite{vaswani2017attention, yang2020survey}.
+
+Alternatively, the emergence of GenAI offers new possibilities for more natural and nuanced translations. Models like GPT (Generative Pre-trained Transformer) and BERT (Bidirectional Encoder Representations from Transformers) excel at understanding meaning across languages. They generate contextualized ``word embeddings'' that are sensitive to surrounding context, capturing subtle information within a sentence~\parencite{ethayarajh-2019-contextual}. However, accurately evaluating the quality of NMT remains challenging, particularly in contexts with ambiguity or where human references are lacking. This challenge is further amplified by the polysemy of spatial prepositions, whose meanings can vary significantly depending on the context~\parencite{bartsch-etal-2023-self, comsa2023benchmark, app11146584}.
+
+Advances in language technology fuel research for better linguistic representations in NLP. However, complexities presented by the typological profiles of the world's languages and the expression of prepositional semantics across different language groups remain significant hurdles. As \textcite{oncevay-etal-2020-bridging} point out, the limited coverage of diverse training data creates a particular obstacle for integrating valuable resources like typology databases into NMT algorithms. Additionally, the inherent context-dependency of language, coupled with the specific challenges posed by spatial semantics -- including ambiguity caused by polysemy and abstractions in other domains -- impedes the construction of truly accurate and faithful models, as noted by \textcite[p.5]{herskovits1986language}. This knowledge gap can be partly attributed to the fact that benchmarks often exclude ambiguous instances from training datasets \parencite{Beigman-Klebanov2009}. This lack of real-world complexity during model training hinders these systems' abilities to manage the nuances encountered in real-world translation scenarios.
+
+To illustrate this challenge, \textcite{fernandes-etal-2024-spatial} conducted a comparison of the performance of two prominent NMT systems, Google Translate (Google) and DeepL (DeepL), in translating the spatial scene in Example~\ref{ex:1} from the Cambridge Dictionary (CAM)\footnote{https://dictionary.cambridge.org/dictionary/english/} from English to Portuguese. For our study, we further translated the same sentence using two LLMs, OpenAI's GPT-3.5 (GPT-3.5) and Meta's LLaMa-3-7B (LLaMa-3), for comparison. A human translation by a professional translator served as a reference (REF). Additionally, we evaluated the translations using the following metrics: BLEU, METEOR, BERTScore, COMET, and TER.
+
+\ex. He \colorbox{lightblue}{swam} \colorbox{lightgray}{\emph{across}} the river. (CAM) \label{ex:1} \\[0.3ex]
+Ele \colorbox{lightgray}{\emph{\textcolor{ForestGreen}{atravessou}}} o rio \colorbox{lightblue}{\textcolor{ForestGreen}{nadando}}. (REF)\label{ex:1d} \\
+$3$SG.M crossed the river by swimming. \\[-0.3ex] 
+    \a. *~Ele \colorbox{lightblue}{\textcolor{Maroon}{nadou}} \colorbox{lightgray}{\emph{\textcolor{Maroon}{do outro lado}}} do rio. (Google) \label{ex:1a} \\
+    $3$SG.M swam from-the other side of-the river.
+    \b. Ele \colorbox{lightgray}{\emph{\textcolor{ForestGreen}{atravessou}}} o rio \colorbox{lightblue}{\textcolor{ForestGreen}{a nado}}. (DeepL) \label{ex:1b} \\
+    $3$SG.M crossed the river by swimming.
+    \c. *~Ele \colorbox{lightblue}{\textcolor{Maroon}{nadou}} \colorbox{lightgray}{\emph{\textcolor{Maroon}{através}}} do rio. (GPT-3.5) \label{ex:1c} \\
+    $3$SG.M swam through-the river. 
+    \d. ?~Ele \colorbox{lightblue}{\textcolor{Maroon}{nadou}} \colorbox{lightgray}{\emph{\textcolor{Maroon}{atravessado}}} o rio. (LLaMa-3) \\
+    $3$SG.M swam crossed-the river. \\[0.3ex] \label{ex:1dd}
+
+Example~\ref{ex:1} demonstrates the persistent difficulties encountered by NMT systems when dealing with issues such as language typology and preposition semantics. As observed, the translations provided by Google (``Ele nadou \emph{do outro lado d}o rio''), GPT-3.5 (``Ele nadou \emph{através d}o rio''), and LLaMa-3 (``Ele nadou \emph{atravessado} o rio), in \ref{ex:1a}, \ref{ex:1c}, and \ref{ex:1dd}, respectively, sound awkward, implying the swimmer moves either on an opposite bank or within the river's confines rather than crossing it entirely. In particular, translation \ref{ex:1dd} is not grammatically correct in Portuguese. When a participle form functions as a modifier in a verb phrase, it typically does not separate the verb and object, and is usually set off by a comma \parencite{cunha2016nova}. On the other hand, DeepL's rendition (``Ele \emph{atravessou} o rio a nado'') accurately captures the nuance of traversing the river perpendicularly, as seen in \ref{ex:1b}. This challenge stems from two reasons: the typologically different ways that English and Portuguese express motion and the polysemous meanings of the preposition ACROSS, which can signify both an opposite location and movement from one side to the other depending on the context \parencite{cambridge-across}. In this specific instance, the meaning is undeniably the latter. By analyzing such instances of mistranslations involving spatial language, we can gain valuable insights to enhance both the development and assessment methodologies for NMT systems.
+
+\begin{table}[htb]
+\small
+  \centering
+  \begin{tabular}{lccccc}
+    \toprule
+    & \multicolumn{5}{c}{\textbf{MT Metric}} \\
+    \textbf{Model} & \textbf{BLEU} & \textbf{METEOR} & \textbf{BERTScore} & \textbf{COMET} & \textbf{TER} \\
+    \midrule
+    DeepL & $\mathbf{0.50}$ & $\mathbf{0.79}$ & $\mathbf{0.96}$ & $\mathbf{0.92}$ & $\mathbf{40.0}$ \\
+    Google & $0.03$ & $0.24$ & $0.84$ & $0.74$ & $120.0$ \\
+    GPT-3.5 & $0.05$ & $0.25$ & $0.87$ & $0.83$ & $80.0$ \\
+    LLaMa-3 & $0.10$ & $0.52$ & $0.92$ & $0.86$ & $80.0$ \\
+    \bottomrule
+  \end{tabular}
+\caption{MT Metrics for Translations in Example (1).}
+\label{table:1.1}
+\end{table}
+
+In addition, while evaluation metrics can assess overall translation quality, they may struggle to evaluate the nuances of spatial relationships, as evidenced by Table~\ref{table:1.1}. In Example~\ref{ex:1}, Google, GPT-3.5, and LLaMa-3 misinterpret the correct meaning of ``ACROSS'', resulting in translation inconsistencies. However, despite these mistranslations, their unexpectedly high BERTScores ($0.84$, $0.87$, and $0.92$ respectively) and COMET scores ($0.74$, $0.83$, and $0.86$ respectively) raise questions about whether these more sophisticated metrics can effectively assess translation quality in cases like this, where language typology and polysemy issues are prevalent. The interesting observation is that if DeepL had not been included in the comparison, the next best translation choice would have been LLaMa-3 -- the second closest in meaning but grammatically incorrect sentence. Given their focus on overall semantic similarity, BERTScore and COMET might not specifically address these issues, which is precisely what explore in this study.
+
+This gap becomes evident when comparing scores. While BERTScore and COMET, which focus on semantic similarity, overlook language typology and polysemy in spatial expressions, traditional metrics like BLEU (Google: $0.03$, GPT-3.5: $0.05$, and LLaMa-3: $0.10$) and METEOR (Google: $0.24$, GPT-3.5: $0.25$, and LLaMa-3: $0.52$) penalize the translations more due to their deviation from the reference in word order and synonyms. Lastly, unlike other metrics that measure text similarity, TER focuses on the number of edits needed to match the reference translation, indicating that DeepL's and Google's outputs would require $40$ and $120$ edits, respectively. This analysis emphasizes the dangers of underestimating each metric's strengths and weaknesses when evaluating the quality of translations involving spatial expressions, which, in some cases, can lead to misguided assessments and incorrect translation choices.
+
+
+\section{Research Questions and Hypotheses}
+
+This research aims to investigate the challenges of translating spatial expressions using LLMs compared to established NMT systems (henceforth sometimes both collectively referred to simply as ``models''), particularly focusing on their advantages and disadvantages compared to human translation. Our objective is to assess model performance when faced with issues such as language typology and prepositional semantics for the English-to-Brazilian-Portuguese (EN-PT-br) language pair.
+
+In particular, we will analyze segments containing two preposition pairs that usually present challenges due to their overlapping meaning in PT-br: ACROSS and THROUGH, and INTO and ONTO (details will be discussed in Subsection~\ref{subsec: Challenges in Spatial Prepositions}).
+
+To achieve this, our goal is two-fold:
+
+\subsection{Analysis of Model Performance and Error Types}
+\label{sub:q1-q2}
+
+The first area focuses on analyzing model performance through the following questions:
+
+\begin{itemize}
+\item \textbf{Q1.} How do open-source LLMs compare against established NMT systems in terms of accuracy, fluency, and post-editing needs when translating segments with EN prepositions ACROSS, THROUGH, INTO, and ONTO from EN-PT-br? Are LLMs overall suitable for performing translation tasks for this specific language pair? 
+
+\item \textbf{Q2.} Are spatial-related preposition errors, such as those involving syntactic projection (sp) and polysemy (po), among the most common in LLMs and NMT systems? Which prepositions and/or meanings are most frequently associated with these errors?
+\end{itemize} 
+
+Based on these questions, we propose the following hypotheses:
+
+\newtcolorbox{hypothesis}{
+colback=gray!5,
+arc=4pt,
+left skip=5pt,
+right skip=5pt,
+boxsep=5pt,
+fonttitle=\bfseries,
+boxrule = 0pt,
+toprule = 4.5pt,
+enhanced,
+fuzzy shadow = {0pt}{-2pt}{-0.5pt}{0.5pt}{black!35},
+width=\textwidth,
+title=Hypothesis \#0 (Null):
+}
+
+\begin{hypothesis}
+The quality of a translation does not differ significantly when considering whether a preposition is spatial or non-spatial.
+\end{hypothesis}
+
+\newtcolorbox{hypothesis2}{
+colback=gray!5,
+arc=4pt,
+left skip=5pt,
+right skip=5pt,
+boxsep=5pt,
+fonttitle=\bfseries,
+boxrule = 0pt,
+toprule = 4.5pt,
+enhanced,
+fuzzy shadow = {0pt}{-2pt}{-0.5pt}{0.5pt}{black!35},
+width=\textwidth,
+title=Hypothesis \#1 (Alternative):
+}
+
+\begin{hypothesis2}
+The quality of a translation is influenced by whether a preposition is spatial or non-spatial, leading to significantly lower quality when it is spatial.
+\end{hypothesis2}
+
+
+For this analysis, we will utilize a human translated corpus of TED-Talk subtitles containing 2,000 segments (details will be discussed on Section~\ref{cap:Methods})
+
+\subsection{Evaluation of MT Metrics}
+\label{sub:q3-q4}
+
+The second area of focus is the evaluation of automated MT metrics. We will investigate the effectiveness of these metrics in evaluating the accuracy of spatial language:
+
+\begin{itemize}
+    \item \textbf{Q3:} How effective are widely-used evaluation metrics BLEU, METEOR, TER, BERTscore, and COMET in capturing the accuracy and errors in translations containing the prepositions ACROSS, THROUGH, INTO, and ONTO from EN-PT-br? \label{Q3}
+    \item \textbf{Q4:} What are the potential strengths and weaknesses of these metrics in identifying and assessing spatial-related errors such as syntactic projections (sp) and polysemy errors (po)? \label{Q4}
+\end{itemize}
+
+By investigating these questions, we aim to gain a deeper understanding of how well models handle spatial language in the context of automatic translation. Additionally, we can identify areas for improvement in both translation quality assessment (TQA) and translation quality estimation (TQE) to better capture the challenges and context-dependence of spatial prepositions.
+
+\section{Motivation and Significance}
+
+Accurate translations of spatial expressions are essential for conveying precise spatial relationships and preserving the meaning of the original text. However, NMT systems still struggle with this task due to the complexity of ``meaning, context, and world knowledge'' as highlighted by~\textcite[p.18]{house2018}. These systems often fail to capture subtle linguistic aspects like idioms, cultural connotations, and context-specific references.
+
+Translating spatial expressions between EN-PT-br presents unique challenges due to how each language conveys spatial concepts. \textcite{fernandes-etal-2024-spatial} describe a phenomenon called ``an idiosyncratic projection of manner in verbs or adjuncts.'' This occurs because English has a richer vocabulary of verbs to express the manner of motion (e.g., run, sprint, dash) compared to Portuguese \parencite{Slobin-2004}. Consequently, NMT systems handling less common spatial expressions might directly translate the English verb's manner aspect into a Portuguese verb, even if that emphasis is atypical. This often results in awkward or inaccurate translations that lack idiomacity in the target language.
+
+Furthermore, evaluating the quality of NMT systems, particularly for nuanced language features like spatial language, requires metrics that go beyond basic accuracy measures, such as word combinations and matching synonyms. While innovative BERT-based metrics can provide results comparable to human judgment, their true effectiveness remains unclear. These metrics are often assumed to model semantic similarity, but the underlying black-box nature of language model representations makes it difficult to fully understand how they arrive at their results \parencite{kaster-etal-2021-global}.
+
+
+\section{The Approach}
+
+This research employs a comparative approach, utilizing a classification scheme for error annotation based on established frameworks for analyzing MT errors \parencite{popovic-2018, Moorkens-2018} and classifying spatial semantics \parencite{talmy2000toward, talmy2000towardb, slobin2005relating}. This mixed methodology combines applied research aiming to evaluate the impact of spatial language on NMT, with both quantitative and qualitative methods. Model performance is measured through automated metric calculations and human evaluation. Our goal is to answer the proposed questions and to validate one of the two hypotheses.
+
+By analyzing the performance of both LLMs and NMT systems on a carefully selected dataset containing sentences with two preposition pairs, we can assess their relative strengths and weaknesses in handling this linguistic challenge. Furthermore, we will evaluate the effectiveness of various automatic metrics in identifying and penalizing errors and inaccuracies in translations, with a particular focus on spatial-related errors.
+
+
+\section{Expected Outcomes}
+
+This study aims to provide a deeper understanding of the strengths and weaknesses of NMT systems, specifically through open-source LLMs, when handling spatial expressions. Our focus is on identifying common errors and potential patterns in how these systems translate spatial language. By uncovering these patterns, we hope to pave the way for future research that leverages LLMs to enhance the accuracy of open-source NMT systems, particularly for tasks like subtitling. This could lead to more precise and fluent translations across languages, facilitating better communication and comprehension.
+
+Additionally, our analysis of MT evaluation metrics will highlight their limitations and suggest potential improvements for assessing translations involving complex language features, such as language typology and preposition polysemy. These findings can guide future research in both MT system development and evaluation metric design, ultimately leading to more nuanced and natural-sounding translations across languages.
+
+
+\section{The Master's Thesis Structure} 
+
+This master's thesis consists of several chapters, each devoted to specific aspects of translation and NMT evaluation, aimed at addressing the research questions and hypotheses.
+
+Chapter \ref{cap:Literature}
+conducts a comprehensive literature review, covering topics such as translation as intercultural communication, equivalence, subtitling challenges, and the role of technology. It also discusses challenges in spatial language translation and introduces NMT, highlighting its potential and limitations, along with the emergence of LLMs. Additionally, it explores automatic and manual methods for assessing translation quality.
+
+Chapter \ref{cap:Methods} outlines the research methods, including corpus selection and compilation, data preprocessing, and the translation process using NMT systems and LLMs. It also describes the scoring methodology and data analysis techniques.
+
+Chapter \ref{cap:Resultados} presents the research results and discussions, including outcomes of data cleaning, evaluation metrics across different models, and manual error analysis. It concludes by addressing research questions and hypotheses, with a focus on accuracy, fluency, and post-editing needs, particularly in spatial language translation.
+
+Finally, Chapter \ref{cap:Conclusao} concludes the dissertation by summarizing the key findings, addressing limitations, and suggesting future research directions.
+
+
+
+

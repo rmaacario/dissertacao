@@ -1,0 +1,8 @@
+Model,Total of Corrects,Total of Errors,% of Corrects,% of Errors
+DeepL,156,44,78.00%,22.00%
+Gemma-7B,46,282,14.02%,85.98%
+LLaMA-2-13B,26,333,7.24%,92.76%
+LLaMA-2-7B,19,421,4.32%,95.68%
+LLaMA-3-8B,45,232,16.25%,83.75%
+Mistral-7B,16,374,4.10%,95.90%
+Mixtral-8x7B,71,177,28.63%,71.37%

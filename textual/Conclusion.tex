@@ -1,0 +1,114 @@
+\chapter{Conclusion}
+\label{cap:Conclusao}
+
+In this concluding chapter, we summarize our findings and address several points that emerged from our analysis and observations. Firstly, we explore the implications of the prominence of EN data in LLM training and its potential impact on other languages. Secondly, we discuss the human translation reliability in MT evaluation. Next, we discuss the challenges and limitations of handling sensitive contents in LLMs, particularly in the context of post-editing and translation refusal mechanisms. Finally, we discuss limitations and future work possibilities to address the issue of spatial language in NMT.
+
+
+\section{Key Findings and Implications}
+
+In this study, we undertook a comprehensive evaluation of open-source LLMs against NMT systems with a focus on translating spatial language. Our results provided several key insights into the performance and limitations of these systems. The data cleaning process ensured that the dataset was of high quality, enabling reliable analyses. We then evaluated the models using a range of metrics (BLEU, METEOR, BERT, COMET, and TER scores), revealing substantial variations in performance across different LLMs.
+
+The manual error analysis was particularly illuminating, highlighting the types of errors that were most prevalent. Syntactic projection (sp) errors, where a model copies the lexicalization patterns of the source language, and polysemy (po), where one of the possible meanings of a spatial preposition is mistranslated, were particularly challenging. We found that spatial language, in general, posed significant difficulties for all models, regardless of architecture and parameters, with errors often concentrated around specific prepositions such as INTO, ACROSS, and THROUGH, along with their meanings (e.g., ``Into(i) -- movement or direction leading to enclosure,'' ``Across(ii) -- movement over a surface,'' ``Through(iii) -- movement past or penetrating a barrier,'' etc.). The preposition ONTO was excluded from the final analysis because its two spatial senses exhibited the same percentage of errors, which were notably lower than non-spatial errors. This may be attributed to the lower frequency of ONTO in our corpus compared to the other three prepositions, which could have influenced the results. This analysis underscored the complexity of translating spatial knowledge across typologically different languages, requiring both the preservation of source content and adherence to the target language's lexicalization patterns \parencite{house2018,talmy2000toward, talmy2000towardb, slobin2005relating}.
+
+Addressing our research questions and hypotheses, we discovered that while some models demonstrated higher accuracy and fluency than others, with NMT systems being completely free of serious mistranslation issues such as interlanguage/code-switching (in) and anglicisms (an), none were entirely free from errors, particularly concerning spatial language. Therefore, we refuted our null hypothesis that assumed Spatial Semantics does not affect model performance%M: o certo seria dizer que a hipótese é que a performance dos modelos é independente de haver ou não expressões espaciais. Mas, como não sei como está nas outras passagens, não vou mexer aqui
+. Our indicate suggest that current NMT systems, such as DeepL, still require some improvements in completely mitigating spatial errors, and open-source LLMs have a long way to go before they can be effectively used for MT tasks, with a reduced need for post-editing and enhanced overall translation quality.
+
+In summary, our research provides an %M: detailed >>> calma!!!
+overview of the strengths and weaknesses of contemporary neural-based language models in the context of spatial language translation. The insights gained from this study not only highlight the current limitations but also pave the way for future improvements in NMT technology, particularly in enhancing the translation of spatial language for the EN-PT-br pairs. Based on our findings, new endeavors could be pursued in order to facilitate more accurate and reliable cross-language communication, especially in demanding domains such as subtitling.
+
+
+\section{The Impact of English Dominance in LLMs} 
+
+As more people turn to tools like ChatGPT for multilingual contents, questions arise on %M: a sociolinguistic level about >>> não se trata de um "nível sociolinguístico"
+the influence of English dominance in training datasets and benchmarks, particularly for complex tasks such as MT. We ponder the implications of recent %M: unsupervised >>> transferências não são necessariamente não-supervisionadas
+techniques like transfer learning, where a model learns from data-rich languages to inform those with less data, which has proven effective for certain tasks like sentiment analysis \parencite{negi-etal-2024-hybrid-approach}. However, from a cognitive and psycholinguistic perspective, we consider how these methods may impact deep linguistic issues related to the conceptualization of spatial semantics, such as preposition polysemy and language typology \parencite{herskovits1986language, talmy2000toward, talmy2000towardb, slobin2005relating}, which we briefly explored in this work.
+
+With a staggering 95\% of LLM training data comprising English texts sourced from the internet, and the remaining 5\% including other dominant languages like French, German, Spanish, Chinese, or Russian, this imbalance has several implications. Thousands of other languages, each with its own nuanced grammar and diverse means to express spatial language, including varieties of Portuguese and even some English dialects, are underrepresented. This linguistic imbalance potentially hinders effective language representation for a significant portion of the world's population \parencite{brookings_language_gaps}.
+
+As LLMs become popular in translation services, there is a growing risk that translated texts will increasingly resemble English in their grammar and structure. This phenomenon, known as \emph{interlanguage}, can significantly affect how speakers of the target languages view and use their own languages. Furthermore, as shown in Example \ref{ex:ex-14}, interlanguage complicates the evaluation of translation quality. Metrics such as BERTscore and COMET, which are designed to assess semantic similarity, may be misled by translations that, while seemingly grammatical, actually incorporate structures and elements from other languages. This confusion can result in highly-scored translations that are superficially fluent but flawed on a deeper level, undermining the reliability of automated assessments.
+
+Addressing these concerns requires a multifaceted approach. Ensuring the availability of high-quality multilingual data is essential, which involves incentivizing data documentation of low-resource languages and dialects. Combining human curation with transfer learning based on typology databases can help leverage the strengths of interlanguage while mitigating its weaknesses. Additionally, there is a pressing need for more comprehensive evaluations of LLMs with multilingual capabilities, as existing assessments are limited in scope and scale \parencite{lai2023chatgpt}. By promoting greater inclusivity in the development and evaluation of LLMs, we can ensure that MT services provide more accurate and culturally sensitive translations. This approach will help preserve the linguistic diversity and cultural integrity of the world's languages, allowing speakers to maintain their linguistic identity in the face of rapidly advancing AI technologies.
+
+
+\section{Are Gold-standard Translations Always `Gold'?} 
+
+In MT evaluation, human references are considered as the gold standard due to their nuanced understanding of language, culture, and style, which are hard to algorithmically replicate. However, inconsistent quality in these references poses drawbacks for accurate benchmarking. For machine translations to be correctly improved or evaluated, human translations serving as benchmarks must ensure high quality. Nevertheless, recent research by \textcite{xu2024contrastive} cautions that gold-standard translations are not infallible. Two illustrative examples will help to highlight this challenge.
+
+Example~\ref{ex:conc-1} involves a translation produced by DeepL, which uses the gerund form ``atravessando'' to translate the EN construction ``clipping through''. Conversely, the human reference (REF) employs ``singrando pelo,'' a construction that aligns more closely with the source text's lexicalization pattern and rhetoric style \parencite{talmy2000toward,talmy2000towardb, slobin2005relating}. Both translations are technically correct, but they differ stylistically. DeepL's rendition conveys a more typical way of colloquially expressing motion in PT-br by using a Path verb, whereas the human translation emphasizes the Manner similar to the EN version. It is worth noting that even ``singrar'' in PT-br, without an adverb or adjunct, does not fully capture the velocity implied by ``clip'' in EN. However, despite both being correct, DeepL's translation would be heavily penalized for diverging from the human reference, highlighting a significant issue in MT evaluation: the potential penalization of valid translations that differ stylistically from the human benchmark.
+
+\ex.\texttt{(inner\_id: 72076)} \hfill  \texttt{Through(ii)} \\[0.3ex]
+\noindent\rule{\linewidth}{0.9pt}
+This is a ship, a liner, \colorbox{lightblue}{\textcolor{blue}{clipping}} \colorbox{lightgray}{\textcolor{blue}{\emph{through}}} the Indian Ocean. (SRC) \label{ex:conc-1} \\[-0.3ex]
+\noindent\rule{\linewidth}{0.3pt}
+Este é um navio, um transatlântico, \colorbox{lightblue}{\textcolor{ForestGreen}{singrando}} \colorbox{lightgray}{\textcolor{ForestGreen}{\emph{pelo}}} Oceano Índico. (REF) \\[-0.3ex]
+\noindent\rule{\linewidth}{0.3pt}
+Este é um navio, um transatlântico, \colorbox{lightgray}{\textcolor{ForestGreen}{\emph{atravessando}}} o Oceano Índico. (DeepL)
+\noindent\rule{\linewidth}{0.9pt}
+
+On the other hand, Example~\ref{ex:conc-2} showcases the translation of the phrasal verb looking into.'' DeepL translates it as ``que dava para,'' accurately reflecting the intended meaning in context. However, the human translator incorrectly translates it as examinando,'' which, although a possible meaning of ``looking into,'' does not fit the context of describing the mirror's location opposite the room \parencite{collinsdictionary}. This example highlights that even human references can contain errors, especially when provided by non-professionals, such as TED Talks volunteers. An incorrect human translation can mislead MT evaluation, falsely indicating poor performance where the machine has actually succeeded.
+
+\ex.\texttt{(inner\_id: 64883)} \hfill \texttt{Into(iii)} \\[0.3ex]
+\noindent\rule{\linewidth}{0.9pt}
+So he'd take people to this two-way mirror \colorbox{lightgray}{\textcolor{blue}{looking \emph{into}}} the room where the snake was. (SRC) \\[-0.3ex] \label{ex:conc-2}
+\noindent\rule{\linewidth}{0.3pt}
+?~Então ele levaria as pessoas para o espelho de dois lados \colorbox{lightgray}{\textcolor{Maroon}{\emph{examinando}}} a sala onde a cobra estava. (REF) \\[-0.3ex]
+\noindent\rule{\linewidth}{0.3pt}
+Então, ele levava as pessoas a esse espelho de duas vias \colorbox{lightgray}{\textcolor{ForestGreen}{que dava \emph{para}}} a sala onde a cobra estava. (DeepL) \\[-0.3ex]
+\noindent\rule{\linewidth}{0.9pt}
+
+These examples underscore the strengths and weaknesses of using human translations as benchmarks. While human translators capture complex linguistic and cultural nuances, their translations must be high-quality to serve as reliable standards. Inaccuracies or stylistic differences in human references can lead to unfair penalization of machine translations and misinform algorithm development. To improve MT quality and evaluation, it is essential to ensure human references are accurate, contextually appropriate, and stylistically diverse. This can be achieved through rigorous quality control, engaging diverse translators, providing sufficient context, and using multiple references. Combining human evaluation with automated metrics and encouraging alternative translations can further enhance benchmark reliability.
+
+
+\section{Handling Sensitive Contents in LLMs} 
+
+Handling sensitive contents poses significant challenges for LLMs, especially in tasks like MT. These challenges encompass various aspects, including content moderation, bias mitigation, and individual security. Particularly, content filtering is essential to prevent the generation of inappropriate, offensive, or harmful materials. Filters help ensure outputs adhere to community guidelines and ethical standards. However, excessively strict filtering can sometimes result in the refusal to translate essential information, impairing the model's performance and evaluation in the target language.
+
+Bias mitigation is another critical consideration. LLMs are pre-trained on massive datasets that may contain inherent societal biases related to gender, race, religion, and other sensitive topics. Large-scale retraining of these models from the ground up is both time-consuming and resource-intensive. Consequently, alternative techniques such as additional binary classification tools \parencite{yifei-etal-2023-conceptor} and fine-tuning with data interventions \parencite{thakur2023language} are being explored to mitigate bias in LLMs.
+
+Ensuring individual privacy and security is also paramount. LLMs must be designed to avoid generating content that could compromise privacy or security. Studies like the one by~\textcite{szawerna-etal-2024-detecting} also demonstrate the potential of fine-tuning techniques to identify sensitive information in LLMs, while also highlight challenges with overdetection.
+
+While filtering in LLMs aim to moderate content, mitigate bias, and protect individual privacy, they can inadvertently prevent translations that, although sensitive, are necessary for completing the task at hand. Our study encountered several instances where models like Gemma-7B refused to translate sensitive content. For instance, in Example~\ref{ex:conc-3}, the segment mentions a case of sexual harassment, and the term ``breasts'' triggered the content filter. Consequently, the model refused to translate the text, citing inappropriate and sexualized language. This refusal hindered the practical utility of the LLM for MT, as the translation of the content was crucial for evaluating the model.
+
+\ex.\texttt{(inner\_id: 281613)} \hfill \texttt{Into(i)}\\[0.3ex]
+\noindent\rule{\linewidth}{0.9pt}
+I was covering a story in rural Virginia, and when we \colorbox{lightgray}{\textcolor{blue}{got back \emph{into}}} the car, my cameraman started saying to me, wondering how much I had enjoyed when \colorbox{lightgray}{\emph{he touched my \underline{breasts}}} when he put the microphone on me.	(SRC) \\[-0.3ex] \label{ex:conc-3}
+\noindent\rule{\linewidth}{0.3pt}
+Fazia uma matéria no interior da Virgínia e, quando \colorbox{lightgray}{\textcolor{ForestGreen}{voltamos \emph{para}}} o carro, meu cinegrafista me perguntou o quanto eu havia gostado do \colorbox{lightgray}{\emph{toque dele nos meus \underline{seios}}} quando ele colocara o microfone em mim. (REF) \\[-0.3ex]
+\noindent\rule{\linewidth}{0.3pt}
+\colorbox{lightyellow}{\textcolor{Maroon}{Não consigo traduzir esse texto, pois contém linguagem inappropriada e sexua-}}\\\colorbox{lightyellow}{\textcolor{Maroon}{lizada.}} (Gemma-7B) \\[-0.3ex]
+\noindent\rule{\linewidth}{0.9pt}
+
+In another instance, illustrated by Example~\ref{ex:conc-4}, the segment describes a case related to terrorism, where the word ``Taliban'' triggered the content filter. Consequently, the model refused to translate the segment, citing content related to illegal and criminal activities. This refusal to translate critical information again demonstrates the limitations of the current filtering mechanisms in handling sensitive content for specific tasks, compromising model performance and assessment once again.
+
+\ex.\texttt{(inner\_id: 387975)} \hfill  \texttt{Into(iii)} \\[0.3ex]
+\noindent\rule{\linewidth}{0.9pt}
+I spent the year working with children who were training to become suicide bombers and with \colorbox{lightgray}{\underline{Taliban}} recruiters, trying to understand how the \colorbox{lightgray}{\underline{Taliban}} were \colorbox{lightgray}{converting these children \emph{into}} live ammunition and why these children were actively signing up to their cause. (SRC) \\[-0.3ex] \label{ex:conc-4}
+\noindent\rule{\linewidth}{0.3pt}
+Eu passei o ano trabalhando com crianças que estavam treinando para se tornarem homens-bomba e com recrutadores do Talebã, tentando entender como o Talebã estava \colorbox{lightgray}{convertendo} essas crianças \colorbox{lightgray}{\emph{em}} munição viva e porque essas crianças se juntavam a essa causa ativamente.(REF) \\[-0.3ex]
+\noindent\rule{\linewidth}{0.3pt}
+\colorbox{lightyellow}{\textcolor{Maroon}{Não consigo realizar a tradução dessa frase, pois envolve atividades ilegais e de}} \\ \colorbox{lightyellow}{\textcolor{Maroon}{natureza criminosa.}} (Gemma-7B) \\[-0.3ex]	
+\noindent\rule{\linewidth}{0.9pt}
+
+
+Overall, content filtering, bias reduction, and privacy issues are crucial for the responsible use of LLMs. However, the current approach of refusing to translate sensitive content can hinder the utility of these models. A more nuanced handling of such content, such as providing translations with appropriate warnings, would enhance the usability and reliability of LLMs across diverse applications. Addressing these challenges is essential for improving the overall performance and reliability of translation models, ensuring they can serve their intended purpose effectively and ethically.
+
+
+\section{Limitations and Future Directions}
+
+This study has several limitations that need addressing. Firstly, the lack of a specific semantic parser to identify segments containing spatial language has been a significant constraint. This initial difficulty impeded our ability to separate the dataset solely based on spatial segments. Consequently, we had to change our approach and analyze both spatial and non-spatial instances, which was not our original intention. The inclusion of non-spatial segments, while extremely revealing of another potentially fruitful area of investigation, diluted the focus of our analysis on the sole processing of spatial language.
+
+Secondly, the inherent limitations of the human evaluation process itself presented another major challenge. Human assessment was the most time-consuming and intensive aspect of our study. Despite its challenges, it proved fundamental because without human reviews, we would not have achieved most of our results, which highlighted misleading outputs from automatic metrics. However, due to the time constraints of this dissertation, we could only evaluate a small portion of the 2,000 segments, choosing to manually annotate just 10\% of them, which comprised 200 segments per model. This limited scope might affect the generalizability of our findings and the robustness of our conclusions.
+
+Looking ahead, future research should focus specifically on improving aspects of spatial semantics and idiomatic expressions highlighted in this study. We envision testing techniques such as few-shot learning, fine-tuning, and retrieval-augmented generation (RAG), which have proven effective in other areas of LLM research. By implementing these advanced methods, the goal is to enhance the model’s ability to handle spatial prepositions accurately. These efforts %M: não vale mencionar a formação. Pense no futuro da pesquisa, não do pesquisador
+will involve curating targeted datasets and rigorously testing these methods to evaluate their effectiveness. If successful, these approaches could significantly improve the handling of issues such as preposition polysemy and spatial semantics in LLMs, leading to more precise and reliable models for MT tasks.
+
+All in all, while our study has highlighted some significant challenges and limitations in performing MT tasks in LLMs compared to NMT systems, it also opens up several avenues for future research. By addressing these limitations and exploring the proposed future directions, we can enhance the performance, reliability, and ethical considerations of LLMs in handling sensitive content and spatial semantics within MT tasks.
+
+
+
+
+
+
+
+
+
